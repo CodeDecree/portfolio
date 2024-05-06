@@ -22,7 +22,7 @@ class Bird {
     push();
     translate(pos.x, pos.y);
     rotate(angle);
-    fill(255)
+    fill(200)
     // imageMode(CENTER);
     // image(dotImg, 0, 0, this.r * 2, this.r * 2);
     ellipse(0,0,2*this.r)

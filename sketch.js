@@ -22,7 +22,7 @@ function setup() {
   world = engine.world;
   ground = new Ground(width / 2, height - 10, width, 20);
 
-  bird = new Bird(windowWidth/6, windowHeight - 100, 25);
+  bird = new Bird(windowWidth/6, windowHeight - 100, 20);
 
   slingshot = new SlingShot(windowWidth/6, windowHeight/2 + 100, bird.body);
 
@@ -30,10 +30,15 @@ function setup() {
   const gap = windowWidth/10;
   sticks[0] = new Box(startingStick-gap+30-gap,200,10,windowHeight/3)
   sticks[1] = new Box(startingStick-gap+30,200,10,windowHeight/3)
-  sticks[2] = new Box(startingStick,200,10,windowHeight/2 )
-  sticks[3] = new Box(startingStick+gap,200,10,windowHeight/2 )
+  sticks[2] = new Box(startingStick,400,10,windowHeight/2 )
+  sticks[3] = new Box(startingStick+gap,400,10,windowHeight/2 )
   sticks[4] = new Box(startingStick+2*gap -30,200,10,windowHeight/3)
   sticks[5] = new Box(startingStick+2*gap -30 + gap,200,10,windowHeight/3)
+
+  //Buttons 
+  sticks[6] = new Button((startingStick-gap+30-gap) + gap/2,20,gap+20,30,"About Me")
+  sticks[7] = new Button((startingStick) + gap/2,20,gap+20,30,"Projects")
+  sticks[8] = new Button((startingStick+2*gap -30) + gap/2,20,gap+20,30,"Work")
 
   const mouse = Mouse.create(canvas.elt);
   const options = {
@@ -61,7 +66,7 @@ function mouseReleased() {
 }
 
 function draw() {
-  background(30)
+  background(50)
   Matter.Engine.update(engine);
   ground.show();
   for (let stick of sticks) {
