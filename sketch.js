@@ -5,7 +5,8 @@
 
 // Code from Challenge: https://editor.p5js.org/codingtrain/sketches/UOR4nIcNS
 
-const { Engine, World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
+const { Engine, World, Bodies, Mouse, MouseConstraint, Constraint, Events } = Matter;
+let popUpEle;
 
 let ground;
 const sticks = [];
@@ -18,6 +19,7 @@ let slingshot;
 
 function setup() {
   const canvas = createCanvas(windowWidth, windowHeight);
+  popUpEle = document.getElementById("content");
   engine = Engine.create();
   world = engine.world;
   ground = new Ground(width / 2, height - 10, width, 20);
@@ -49,13 +51,29 @@ function setup() {
   mouse.pixelRatio = pixelDensity();
   mConstraint = MouseConstraint.create(engine, options);
   World.add(world, mConstraint);
-}
+
+  //collision listener
+
+  Events.on(engine, 'collisionStart', (event) => {
+    const pairs = event.pairs;
+    console.log('collision occured')
+  
+    pairs.forEach(pair => {
+      const bodyA = pair.bodyA;
+      const bodyB = pair.bodyB;
+  
+      console.log("collision occured");
+      console.log(bodyA)
+      console.log(bodyB)
+    });
+  });}
 
 function keyPressed() {
   if (key == ' ') {
     World.remove(world, bird.body);
-    bird = new Bird(150, 300, 25);
+    bird = new Bird(150, 300, 20);
     slingshot.attach(bird.body);
+    popUpEle.style.display = "none";
   }
 }
 
@@ -63,6 +81,9 @@ function mouseReleased() {
   setTimeout(() => {
     slingshot.fly();
   }, 100);
+  setTimeout(() => {
+    popUpEle.style.display = "flex"
+  },1000)
 }
 
 function draw() {
@@ -74,4 +95,6 @@ function draw() {
   }
   slingshot.show();
   bird.show();
+  
 }
+

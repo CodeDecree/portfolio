@@ -13,3 +13,16 @@ canvas {
   padding: 0;
   overflow: hidden;
 }
+#content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  font-family: 'Roboto';
+  background-color: transparent;
+  color: rgb(200, 200, 200);
+  font-size: 20px;
+  text-align: center;
+}
